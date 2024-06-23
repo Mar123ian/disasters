@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ИЗБЕРЕТЕ КАТЕГОРИЯ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('background.png'); /* Задаваме заден план със снимка background.png */
+            background-size: cover; /* Позволява на картинката да покрива цялото пространство на екрана */
+            background-position: center; /* Центрираме задния план по хоризонтала и вертикала */
+        }
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 600px;
+            margin: 20px auto; /* добавяме малко марджин отгоре за по-добър визуален ефект */
+            text-align: center;
+            margin-left:30%;
+            padding: 20px; /* Добавяме padding за по-добър външен вид */
+            border-radius: 8px; /* Закръгляме ъглите */
+        }
+        .category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* сянка на контейнера */
+        }
+        .category:hover {
+            transform: scale(1.05);
+        }
+        .category img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .category p {
+            margin: 0;
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: -95px;
+            margin-left:5%;
+        }
+        a{
+            text-decoration:none;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">ИЗБЕРЕТЕ КАТЕГОРИЯ</div>
+
+    <div  class="categories">
+        <a href="http://naturaldisastersquiz-bg.free.nf/firelevels.html" class="category" >
+            <img  src="fire.jpg" alt="Пожари">
+            <p>Пожари</p>
+        </a>
+        <a href="http://naturaldisastersquiz-bg.free.nf/floodinglevels.html" class="category" onclick="startQuiz('Наводнения')">
+            <img src="flooding1.webp" alt="Наводнения">
+            <p>Наводнения</p>
+        </a>
+        <a href="http://naturaldisastersquiz-bg.free.nf/huricanelevels.html" class="category" onclick="startQuiz('Урагани')">
+            <img src="huricane.jpg" alt="Урагани">
+            <p>Урагани</p>
+        </a>
+        <a href="http://naturaldisastersquiz-bg.free.nf/earthquakelevels.html" class="category" onclick="startQuiz('Земетресения')">
+            <img src="earthquake.avif" alt="Земетресения">
+            <p>Земетресения</p>
+        </a>
+        <a href="http://naturaldisastersquiz-bg.free.nf/haillevels.html" class="category" onclick="startQuiz('Градушки')">
+            <img src="hail1.jpg" alt="Градушки">
+            <p>Градушки</p>
+        </a>
+        <a href="http://naturaldisastersquiz-bg.free.nf/stormlevels.html" class="category" onclick="startQuiz('Гръмотевични бури')">
+            <img src="storm.avif" alt="Гръмотевични бури">
+            <p>Гръмотевични бури</p>
+        </a>
+        <a href="http://naturaldisastersquiz-bg.free.nf/tsunamilevels.html" class="category" style="grid-column: 2 / span 1; grid-row: 3 / span 1;" onclick="startQuiz('Цунами')">
+            <img src="tsunami.avif" alt="Цунами">
+            <p>Цунами</p>
+        </a>
+    </div>
+
+    
+</body>
+</html>

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <title>Сини Бутони и Куиз</title>
+    <style>
+       
+
+       .question, .question2, .question3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.answer, .answer2, .answer3, #retry, #submit, #retry2, #submit2,  #retry3, #submit3{
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    width: 200px;
+    
+    margin: 10px;
+}
+
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #B6F8F4;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+
+        .button-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .blue-button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 300px;
+            height: 300px;
+            font-size: 160px;
+            cursor: pointer;
+            margin: 0 10px;
+            border-radius: 10px;
+        }
+
+        .blue-button:hover {
+            font-size: 180px;
+        }
+
+        .locked-button {
+            background-color: #87CEEB;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 300px;
+            height: 300px;
+            font-size: 160px;
+            cursor: not-allowed;
+            margin: 0 10px;
+            border-radius: 10px;
+        }
+
+        .arrow {
+            font-size: 90px;
+        }
+
+        .title {
+            font-size: 100px;
+            margin-bottom: 80px;
+        }
+
+        #quizSection1, #quizSection2, #quizSection3 {
+            display: none;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .question {
+            margin-bottom: 15px;
+        }
+
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin: 5px 0;
+        }
+
+        .correct {
+            background-color: #d4edda;
+        }
+
+        .incorrect {
+            background-color: #f8d7da;
+        }
+
+        #submit {
+            margin-top: 20px;
+        }
+
+        #timer {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+       #quizSection1, #quizSection1, #quizSection1{
+        margin-top:50px;
+       }
+       
+       
+    </style>
+</head>
+<body>
+    <div id="buttonSection">
+        <div class="title">ИЗБЕРИ НИВО:</div>
+        <div class="button-container">
+            <button id="level1" class="blue-button">1</button>
+            <span class="arrow">→</span>
+            <button id="level2" class="locked-button" disabled>2</button>
+            <span class="arrow">→</span>
+            <button id="level3" class="locked-button" disabled>3</button>
+        </div>
+    </div>
+
+    <div id="quizSection1">
+        <h1>Куиз за Природни Бедствия и Пожарна Безопасност - Ниво 1</h1>
+        <div id="timer">Време: 0:00</div>
+        <form id="quizForm">
+           <div class="question" id="q1">
+                <p>1·  Какъв е препоръчителният начин за подготовка за ураган? </p>
+                <button type="button" class="answer" data-question="q1" data-value="a">a) Затваряне на прозорците и вратите </button>
+                <button type="button" class="answer" data-question="q1" data-value="b">b) Излизане на открито </button>
+                <button type="button" class="answer" data-question="q1" data-value="c">c) Съхранение на водни запаси и храна </button>
+                <button type="button" class="answer" data-question="q1" data-value="d">d) Използване на свещи</button>
+            </div>
+
+            <div class="question" id="q2" style="display:none;">
+                <p>2. ·  Кои са основните дейности при евакуация по време на ураган? </p>
+                <button type="button" class="answer" data-question="q2" data-value="a">a) Заключване вкъщи </button>
+                <button type="button" class="answer" data-question="q2" data-value="b">b) Съхранение на картофи </button>
+                <button type="button" class="answer" data-question="q2" data-value="c">c) Следване на указания за евакуация </button>
+                <button type="button" class="answer" data-question="q2" data-value="d">d) Подхранване на гъби</button>
+            </div>
+
+            <div class="question" id="q3" style="display:none;">
+                <p>3. ·  Какво трябва да правите, ако сте навън, когато ураганът настъпи? </p>
+                <button type="button" class="answer" data-question="q3" data-value="a">a) Оставане навън и чакане на избистряне на времето </button>
+                <button type="button" class="answer" data-question="q3" data-value="b">b) Търсене на най-близкото затворено място за убежище </button>
+                <button type="button" class="answer" data-question="q3" data-value="c">c) Разпръскване на гориво около себе си </button>
+                <button type="button" class="answer" data-question="q3" data-value="d">d) Отпадане на отговорността си</button>
+            </div>
+
+            <div class="question" id="q4" style="display:none;">
+                <p>4·  Кое е най-безопасното място в дома по време на ураган? </p>
+                <button type="button" class="answer" data-question="q4" data-value="a">a) Под крилото на самолет </button>
+                <button type="button" class="answer" data-question="q4" data-value="b">b) Закрити стаи или под маса </button>
+                <button type="button" class="answer" data-question="q4" data-value="c">c) По време на концерт </button>
+                <button type="button" class="answer" data-question="q4" data-value="d">d) В английската глава</button>
+            </div>
+
+            <div class="question" id="q5" style="display:none;">
+                <p>5. ·  Кой е най-добрият начин за следене на прогнозите за урагани? </p>
+                <button type="button" class="answer" data-question="q5" data-value="a">a) предсказване от гадател </button>
+                <button type="button" class="answer" data-question="q5" data-value="b">b) Използване на телевизионни канали и радиостанции </button>
+                <button type="button" class="answer" data-question="q5" data-value="c">c) Отказ от празнуване </button>
+                <button type="button" class="answer" data-question="q5" data-value="d">d) Включване на джоб</button>
+            </div>
+
+
+            <button type="button" id="submit" style="display:none;">Изпрати</button>
+            <button type="button" id="retry" onclick="window.location.href='http://naturaldisastersquiz-bg.free.nf/huricanelevels.html'" style="display:none;">ЗАПОЧНИ ОТ НАЧАЛО</button>
+        </form>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        // JavaScript code to handle quiz navigation
+        const questions = document.querySelectorAll('.question');
+        const answerButtons = document.querySelectorAll('.answer');
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+
+        answerButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const questionId = button.getAttribute('data-question');
+                const answerValue = button.getAttribute('data-value');
+                userAnswers[questionId] = answerValue;
+
+                const currentQuestion = questions[currentQuestionIndex];
+                currentQuestion.style.display = 'none';
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    const nextQuestion = questions[currentQuestionIndex];
+                    nextQuestion.style.display = 'flex';
+                } else {
+                    document.getElementById('submit').style.display = 'flex';
+                }
+            });
+        });
+</script>
+<div id="quizSection2">
+    <!-- Content for quiz section 2 goes here -->
+    <h1>Куиз за Природни Бедствия и Пожарна Безопасност - Ниво 2</h1>
+        <div id="timer2">Време: 0:00</div>
+        <form id="quizForm">
+            <div class="question2" id="q1">
+                <p>1. ·  Кое е правилното действие, ако живеете в зона, засегната от ураган? </p>
+                <button type="button" class="answer2" data-question="q1" data-value="a">a) Оставане в дома си </button>
+                <button type="button" class="answer2" data-question="q1" data-value="b">b) Използване на механични устройства </button>
+                <button type="button" class="answer2" data-question="q1" data-value="c">c) Следване на указанията на местните органи за управление на бедствията </button>
+                <button type="button" class="answer2" data-question="q1" data-value="d">d) Използване на максимални усилия</button>
+            </div>
+
+            <div class="question2" id="q2" style="display:none;">
+                <p>2. ·  Какво трябва да правите, ако пътувате и ураганът ви застигне? </p>
+                <button type="button" class="answer2" data-question="q2" data-value="a">a) Път </button>
+                <button type="button" class="answer2" data-question="q2" data-value="b">b) Приюти се в най-близката безопасна сграда </button>
+                <button type="button" class="answer2" data-question="q2" data-value="c">c) Отхвърляне на купоните </button>
+                <button type="button" class="answer2" data-question="q2" data-value="d">d) Квитанция</button>
+            </div>
+
+            <div class="question2" id="q3" style="display:none;">
+                <p>3. ·  Кое е важно да имате в запас за ураган? </p>
+                <button type="button" class="answer2" data-question="q3" data-value="a">a) Чинии и прибори </button>
+                <button type="button" class="answer2" data-question="q3" data-value="b">b) Вода и храна за няколко дни </button>
+                <button type="button" class="answer2" data-question="q3" data-value="c">c) Парфюми и кремове </button>
+                <button type="button" class="answer2" data-question="q3" data-value="d">d) Задължения</button>
+            </div>
+
+            <div class="question2" id="q4" style="display:none;">
+                <p>4·  Как може да се предпазите от опасни вълни по време на ураган? </p>
+                <button type="button" class="answer2" data-question="q4" data-value="a">a) Широко гребане </button>
+                <button type="button" class="answer2" data-question="q4" data-value="b">b) Избягване на районите в близи до водни пътища </button>
+                <button type="button" class="answer2" data-question="q4" data-value="c">c) Плуване с дъски </button>
+                <button type="button" class="answer2" data-question="q4" data-value="d">d) Продаване на камиони</button>
+            </div>
+
+            <div class="question2" id="q5" style="display:none;">
+                <p>5. ·  Кое е подходящото облекло за носене по време на ураган? </p>
+                <button type="button" class="answer2" data-question="q5" data-value="a">a) Пижама и чехли </button>
+                <button type="button" class="answer2" data-question="q5" data-value="b">b) Здрави обувки и удобна дреха </button>
+                <button type="button" class="answer2" data-question="q5" data-value="c">c) Пиците на главата </button>
+                <button type="button" class="answer2" data-question="q5" data-value="d">d) Диван</button>
+            </div>
+
+
+
+            <button type="button" id="submit2" style="display:none;">Изпрати</button>
+            <button type="button" id="retry2" onclick="f()" style="display:none;">ЗАПОЧНИ ОТ НАЧАЛО</button>
+        </form>
+        <div id="results2"></div>
+</div>
+
+<script>
+    // JavaScript code to handle quiz navigation
+     questions2 = document.querySelectorAll('.question2');
+     answerButtons2 = document.querySelectorAll('.answer2');
+     currentQuestionIndex2 = 0;
+     userAnswers2 = {};
+
+    answerButtons2.forEach(button => {
+        button.addEventListener('click', () => {
+            const questionId2 = button.getAttribute('data-question');
+            const answerValue2 = button.getAttribute('data-value');
+            userAnswers2[questionId2] = answerValue2;
+
+            const currentQuestion2 = questions2[currentQuestionIndex2];
+            currentQuestion2.style.display = 'none';
+            currentQuestionIndex2++;
+            if (currentQuestionIndex2 < questions2.length) {
+                const nextQuestion2 = questions2[currentQuestionIndex2];
+                nextQuestion2.style.display = 'flex';
+            } else {
+                document.getElementById('submit2').style.display = 'flex';
+            }
+        });
+    });
+</script>
+
+<div id="quizSection3">
+    <h1>Куиз за Природни Бедствия и Пожарна Безопасност - Ниво 3</h1>
+    <div id="timer3">Време: 0:00</div>
+    <form id="quizForm">
+        <div class="question3" id="q1">
+            <p>1. Какво трябва да правите след преминаването на урагана, за да оцените щетите? </p>
+            <button type="button" class="answer3" data-question="q1" data-value="a">a) Отказ на приемане на помощ </button>
+            <button type="button" class="answer3" data-question="q1" data-value="b">b) Разстилане на килима във кухнята </button>
+            <button type="button" class="answer3" data-question="q1" data-value="c">c) Инспектиране на сградата и събиране на доказателства за щетите </button>
+            <button type="button" class="answer3" data-question="q1" data-value="d">d) Завръщане</button>
+        </div>
+    
+        <div class="question3" id="q2" style="display:none;">
+            <p>2. ·  Кои са основните предпазни мерки за електрическите устройства по време на ураган? </p>
+            <button type="button" class="answer3" data-question="q2" data-value="a"> ·  a) Включете всички електроуреди </button>
+            <button type="button" class="answer3" data-question="q2" data-value="b"> b) Положете ги в сейф </button>
+            <button type="button" class="answer3" data-question="q2" data-value="c"> c) Изключете ги от електрическата мрежа </button>
+            <button type="button" class="answer3" data-question="q2" data-value="d"> d) Инсталирайте ги </button>
+        </div>
+    
+        <div class="question3" id="q3" style="display:none;">
+            <p>3. ·  Кое е най-важното да включвате в автомобила си преди урагана? </p>
+            <button type="button" class="answer3" data-question="q3" data-value="a"> a) Чистата детска игра </button>
+            <button type="button" class="answer3" data-question="q3" data-value="b"> b) Необходимите средства за безопасност, като противогаза и аптечката за първа помощ </button>
+            <button type="button" class="answer3" data-question="q3" data-value="c"> c) Страхотна раница </button>
+            <button type="button" class="answer3" data-question="q3" data-value="d"> d) ремъци </button>
+        </div>
+    
+        <div class="question3" id="q4" style="display:none;">
+            <p>4 Какво е препоръчителното време за подготовка преди урагана? </p>
+            <button type="button" class="answer3" data-question="q4" data-value="a"> a) 24 часа </button>
+            <button type="button" class="answer3" data-question="q4" data-value="b"> b) Няколко седмици </button>
+            <button type="button" class="answer3" data-question="q4" data-value="c"> c) 12 часа </button>
+            <button type="button" class="answer3" data-question="q4" data-value="d"> d) На земята </button>
+        </div>
+    
+        <div class="question3" id="q5" style="display:none;">
+            <p>5. Кое е правилното действие, ако се намирате на плажа и ураганът наближава? </p>
+            <button type="button" class="answer3" data-question="q5" data-value="a"> a) Оставане на плажа и следене на урагана </button>
+            <button type="button" class="answer3" data-question="q5" data-value="b"> b) Връщане в хотела или убежище </button>
+            <button type="button" class="answer3" data-question="q5" data-value="c"> c) Използване на сантиметъра за наведнъж </button>
+            <button type="button" class="answer3" data-question="q5" data-value="d"> d) Отказ на ракетата заедно </button>
+        </div>
+
+
+    
+        <button type="button" id="submit3" style="display:none;">Изпрати</button>
+        <button type="button" id="retry3" onclick="f2()" style="display:none;">ЗАПОЧНИ ОТ НАЧАЛО</button>
+    </form>
+    <div id="results3"></div>
+    
+</div>
+<script>
+    // JavaScript code to handle quiz navigation
+    questions3 = document.querySelectorAll('.question3');
+    answerButtons3 = document.querySelectorAll('.answer3');
+    currentQuestionIndex3 = 0;
+    userAnswers3 = {};
+
+    answerButtons3.forEach(button => {
+        button.addEventListener('click', () => {
+            const questionId3 = button.getAttribute('data-question');
+            const answerValue3 = button.getAttribute('data-value');
+            userAnswers3[questionId3] = answerValue3;
+
+            const currentQuestion3 = questions3[currentQuestionIndex3];
+            currentQuestion3.style.display = 'none';
+            currentQuestionIndex3++;
+            if (currentQuestionIndex3 < questions3.length) {
+                const nextQuestion3 = questions3[currentQuestionIndex3];
+                nextQuestion3.style.display = 'flex';
+            } else {
+                document.getElementById('submit3').style.display = 'flex';
+            }
+        });
+    });
+</script>
+
+<script>
+        // Function to show quiz section and hide button section when a level button is clicked
+        function showQuiz(level) {
+            document.getElementById('buttonSection').style.display = 'none';
+            document.getElementById('quizSection1').style.display = 'none';
+            document.getElementById('quizSection2').style.display = 'none';
+            document.getElementById('quizSection3').style.display = 'none';
+            document.getElementById(`quizSection${level}`).style.display = 'block';
+        }
+
+        // Timer functionality
+        let seconds = 0;
+        let minutes = 0;
+        const timerElement = document.getElementById('timer');
+
+        function updateTimer() {
+            seconds++;
+            if (seconds >= 60) {
+                seconds = 0;
+                minutes++;
+            }
+            let formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+            timerElement.innerText = `Време: ${minutes}:${formattedSeconds}`;
+        }
+
+        setInterval(updateTimer, 1000);
+
+        // Quiz submission and result calculation
+        document.getElementById('submit').addEventListener('click', function() {
+            const correctAnswers = {
+                q1: 'c',
+                q2: 'c',
+                q3: 'b',
+                q4: 'b',
+                q5: 'b'
+            };
+
+
+
+            let score = 0;
+            let totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let questionId in correctAnswers) {
+                const correctAnswer = correctAnswers[questionId];
+                const userAnswer = userAnswers[questionId];
+
+                if (userAnswer === correctAnswer) {
+                    score++;
+                }
+            }
+
+            document.getElementById('results').innerText = `Вашият резултат: ${score} от ${totalQuestions}. Време: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+
+            // Unlock the next level if the quiz is passed
+            if (score === totalQuestions) {
+                if (currentLevel === 1) {
+                    document.getElementById('level2').disabled = false;
+                    document.getElementById('level2').classList.remove('locked-button');
+                    document.getElementById('level2').classList.add('blue-button');
+                } else if (currentLevel === 2) {
+                    document.getElementById('level3').disabled = false;
+                    document.getElementById('level3').classList.remove('locked-button');
+                    document.getElementById('level3').classList.add('blue-button');
+                }
+                document.getElementById(`quizSection${currentLevel}`).style.display = 'none';
+                document.getElementById('buttonSection').style.display = 'inline';
+            }
+            else{
+                document.getElementById('retry').style.display = 'inline';
+                document.getElementById('submit').style.display = 'none';
+                document.getElementById('timer').style.display = 'none';
+            }
+        });
+
+        // Set up level buttons to show the quiz and set the current level
+        let currentLevel = 1;
+
+        document.getElementById('level1').addEventListener('click', function() {
+            currentLevel = 1;
+            showQuiz(1);
+        });
+
+        document.getElementById('level2').addEventListener('click', function() {
+            if (!this.disabled) {
+                currentLevel = 2;
+                showQuiz(2);
+            }
+        });
+
+        
+
+        document.getElementById('level3').addEventListener('click', function() {
+            if (!this.disabled) {
+                currentLevel = 3;
+                showQuiz(3);
+            }
+        });
+
+        // Initially hide quizSection1
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('quizSection1').style.display = 'none';
+        });
+
+        
+    </script>
+
+<script>
+    // Function to show quiz section and hide button section when a level button is clicked
+    function showQuiz(level) {
+        document.getElementById('buttonSection').style.display = 'none';
+        document.getElementById('quizSection1').style.display = 'none';
+        document.getElementById('quizSection2').style.display = 'none';
+        document.getElementById('quizSection3').style.display = 'none';
+        document.getElementById(`quizSection${level}`).style.display = 'block';
+    }
+
+   // Timer functionality
+   let seconds2 = 0;
+    let minutes2 = 0;
+    let interval2 = null; // Променлива за съхранение на setInterval
+
+    function startTimer2() {
+        clearInterval(interval2); // Изчистваме предишния интервал, ако има такъв
+        seconds2 = 0;
+        minutes2 = 0;
+        interval2 = setInterval(updateTimer2, 1000); // Стартираме нов интервал
+    }
+
+    function updateTimer2() {
+        seconds2++;
+        if (seconds2 >= 60) {
+            seconds2 = 0;
+            minutes2++;
+        }
+
+        let formattedMinutes2 = minutes2 < 10 ? `0${minutes2}` : minutes2;
+        let formattedSeconds2 = seconds2 < 10 ? `0${seconds2}` : seconds2;
+
+        document.getElementById('timer2').innerText = `Време: ${formattedMinutes2}:${formattedSeconds2}`;
+    }
+
+    // При зареждане на страницата, стартирайте таймера
+    window.onload = function() {
+        startTimer2(); // Инициализираме новия таймер
+    };
+    
+    setInterval(updateTimer2, 1000);
+    // Quiz submission and result calculation
+    document.getElementById('submit2').addEventListener('click', function() { // changed 'submit' to 'submit2'
+        const correctAnswers = {
+                q1: 'c',
+                q2: 'b',
+                q3: 'c',
+                q4: 'b',
+                q5: 'b'
+            };
+
+
+
+        let score = 0;
+        let totalQuestions = Object.keys(correctAnswers).length;
+
+        for (let questionId in correctAnswers) {
+            const correctAnswer = correctAnswers[questionId];
+            const userAnswer = userAnswers2[questionId]; // changed 'userAnswers' to 'userAnswers2'
+
+            if (userAnswer === correctAnswer) {
+                score++;
+            }
+        }
+
+        document.getElementById('results2').innerText = `Вашият резултат: ${score} от ${totalQuestions}. Време: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+
+        // Unlock the next level if the quiz is passed
+        if (score === totalQuestions) {
+            if (currentLevel === 1) {
+                document.getElementById('level2').disabled = false;
+                document.getElementById('level2').classList.remove('locked-button');
+                document.getElementById('level2').classList.add('blue-button');
+            } else if (currentLevel === 2) {
+                document.getElementById('level3').disabled = false;
+                document.getElementById('level3').classList.remove('locked-button');
+                document.getElementById('level3').classList.add('blue-button');
+            }
+            document.getElementById(`quizSection${currentLevel}`).style.display = 'none';
+            document.getElementById('buttonSection').style.display = 'inline';
+        }
+        else {
+            document.getElementById('retry2').style.display = 'inline'; // changed 'retry' to 'retry2'
+            document.getElementById('submit2').style.display = 'none'; // changed 'submit' to 'submit2'
+            document.getElementById('timer').style.display = 'none';
+        }
+    });
+
+    // Set up level buttons to show the quiz and set the current level
+     currentLevel = 1;
+
+    document.getElementById('level1').addEventListener('click', function() {
+        currentLevel = 1;
+        showQuiz(1);
+    });
+
+    document.getElementById('level2').addEventListener('click', function() {
+        if (!this.disabled) {
+            currentLevel = 2;
+            showQuiz(2);
+        }
+    });
+
+    document.getElementById('level3').addEventListener('click', function() {
+        if (!this.disabled) {
+            currentLevel = 3;
+            showQuiz(3);
+        }
+    });
+
+    // Initially hide quizSection1
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('quizSection1').style.display = 'none';
+    });
+
+    
+</script>
+<script>
+    // Function to show quiz section and hide button section when a level button is clicked
+    function showQuiz(level) {
+        document.getElementById('buttonSection').style.display = 'none';
+        document.getElementById('quizSection1').style.display = 'none';
+        document.getElementById('quizSection2').style.display = 'none';
+        document.getElementById('quizSection3').style.display = 'none';
+        document.getElementById(`quizSection${level}`).style.display = 'block';
+    }
+
+   // Timer functionality
+let seconds3 = 0;
+let minutes3 = 0;
+let interval3 = null; // Променлива за съхранение на setInterval
+
+function startTimer3() {
+    clearInterval(interval3); // Изчистваме предишния интервал, ако има такъв
+    seconds3 = 0;
+    minutes3 = 0;
+    interval3 = setInterval(updateTimer3, 1000); // Стартираме нов интервал
+}
+
+function updateTimer3() {
+    seconds3++;
+    if (seconds3 >= 60) {
+        seconds3 = 0;
+        minutes3++;
+    }
+
+    let formattedMinutes3 = minutes3 < 10 ? `0${minutes3}` : minutes3;
+    let formattedSeconds3 = seconds3 < 10 ? `0${seconds3}` : seconds3;
+
+    document.getElementById('timer3').innerText = `Време: ${formattedMinutes3}:${formattedSeconds3}`;
+}
+
+// При зареждане на страницата, стартирайте таймера
+window.onload = function() {
+    startTimer3(); // Инициализираме новия таймер
+};
+setInterval(updateTimer3, 1000);
+// Quiz submission and result calculation
+document.getElementById('submit3').addEventListener('click', function() {
+    const correctAnswers = {
+                q1: 'c',
+                q2: 'c',
+                q3: 'b',
+                q4: 'a',
+                q5: 'b'
+            };
+
+
+
+    let score = 0;
+    let totalQuestions = Object.keys(correctAnswers).length;
+
+    for (let questionId in correctAnswers) {
+        const correctAnswer = correctAnswers[questionId];
+        const userAnswer = userAnswers3[questionId]; // Промених 'userAnswers2' на 'userAnswers3'
+
+        if (userAnswer === correctAnswer) {
+            score++;
+        }
+    }
+
+    document.getElementById('results3').innerText = `Вашият резултат: ${score} от ${totalQuestions}. Време: ${minutes3}:${seconds3 < 10 ? '0' + seconds3 : seconds3}`;
+        // Unlock the next level if the quiz is passed
+        if (score === totalQuestions) {
+            if (currentLevel === 1) {
+                document.getElementById('level2').disabled = false;
+                document.getElementById('level2').classList.remove('locked-button');
+                document.getElementById('level2').classList.add('blue-button');
+            } else if (currentLevel === 2) {
+                document.getElementById('level3').disabled = false;
+                document.getElementById('level3').classList.remove('locked-button');
+                document.getElementById('level3').classList.add('blue-button');
+            }
+            else if (currentLevel === 3) {
+                window.location.href="http://naturaldisastersquiz-bg.free.nf/completed.html";
+            }
+            document.getElementById(`quizSection${currentLevel}`).style.display = 'none';
+            document.getElementById('buttonSection').style.display = 'inline';
+        }
+        else {
+            document.getElementById('retry3').style.display = 'inline'; // changed 'retry' to 'retry2'
+            document.getElementById('submit3').style.display = 'none'; // changed 'submit' to 'submit2'
+            document.getElementById('timer3').style.display = 'none';
+        }
+    });
+
+    // Set up level buttons to show the quiz and set the current level
+     currentLevel = 1;
+
+    document.getElementById('level1').addEventListener('click', function() {
+        currentLevel = 1;
+        showQuiz(1);
+    });
+
+    document.getElementById('level2').addEventListener('click', function() {
+        if (!this.disabled) {
+            currentLevel = 2;
+            showQuiz(2);
+        }
+    });
+
+    document.getElementById('level3').addEventListener('click', function() {
+        if (!this.disabled) {
+            currentLevel = 3;
+            showQuiz(3);
+        }
+    });
+
+    // Initially hide quizSection1
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('quizSection1').style.display = 'none';
+    });
+    function f() {
+            sessionStorage.setItem('buttonClicked', 'true'); // Запазваме в sessionStorage, че бутона е натиснат
+            location.reload(); // Презареждаме страницата
+        }
+
+        // Функция за бутона за третото ниво
+        function f2() {
+            sessionStorage.setItem('buttonClicked2', 'true'); // Запазваме в sessionStorage, че бутона е натиснат
+            location.reload(); // Презареждаме страницата
+        }
+
+        // Проверяваме, когато страницата е заредена
+        window.onload = function() {
+            var buttonClicked = sessionStorage.getItem('buttonClicked');
+            var buttonClicked2 = sessionStorage.getItem('buttonClicked2');
+
+            var level2Button = document.getElementById('level2');
+            var level3Button = document.getElementById('level3');
+
+            if (buttonClicked === 'true' && level2Button) {
+                level2Button.disabled = false;
+                level2Button.style.backgroundColor = "#2196F3";
+            }
+
+            if (buttonClicked2 === 'true' && level3Button) {
+                level3Button.disabled = false;
+                level3Button.style.backgroundColor = "#2196F3";
+                level2Button.disabled = false;
+                level2Button.style.backgroundColor = "#2196F3";
+            }
+
+            sessionStorage.removeItem('buttonClicked');
+            sessionStorage.removeItem('buttonClicked2');
+        };
+</script>
+</body>
+</html>
